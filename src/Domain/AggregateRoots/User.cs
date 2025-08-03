@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using System.Data;
+using Domain.Enums;
 using Domain.Events;
 using Domain.Models.Identity;
 
@@ -68,6 +69,8 @@ public class User : AggregateRoot
     public void RemoveRole(UserRole role)
     {
         if (UserRoles.Remove(role))
+        {
             AddDomainEvent(new RoleRemovedFromUserDomainEvent(Id, role.Role.Name));
+        }
     }
 }
